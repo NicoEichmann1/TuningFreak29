@@ -214,10 +214,21 @@
   </div>
 
   <script>
-    // Scrollt beim Klick auf "Social-Media" zum YouTube-Bereich
-    document.getElementById('social-media-link').addEventListener('click', function() {
-      document.getElementById('youtube-section').scrollIntoView({ behavior: 'smooth' });
+    // Scrollt beim Klick auf "Social-Media" zum YouTube-Bereich, auch mobil korrekt
+    document.getElementById('social-media-link').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      const target = document.getElementById('youtube-section');
+      const headerOffset = 80; // Falls du einen fixen Header hast, Höhe anpassen (z.B. 80px)
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     });
   </script>
 </body>
 </html>
+
